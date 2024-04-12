@@ -27,7 +27,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       <main className="flex-1 h-full overflow-y-auto">
         <SearchCommand />
         {children}
-        </main>
+      </main>
     </div>
   )
 }

@@ -49,7 +49,6 @@ export const Item = ({
   expended,
   onExpend,
 }: ItemProps) => {
-  const ChevronIcon = expended ? ChevronDown : ChevronRight
   const create = useMutation(api.documents.create)
   const router = useRouter()
   const { user } = useUser()
@@ -93,6 +92,8 @@ export const Item = ({
     })
   }
 
+  const ChevronIcon = expended ? ChevronDown : ChevronRight
+
   return (
     <div
       onClick={onClick}
@@ -108,7 +109,7 @@ export const Item = ({
       {!!id && (
         <div
           role="button"
-          className="h-full rounded-sm hover:bg-neutral-300 dark:bg-neutral-600 mr-1"
+          className="h-full rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 mr-1"
           onClick={handleExpend}
         >
           <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
@@ -121,7 +122,7 @@ export const Item = ({
       )}
       <span className="truncate">{label}</span>
       {isSearch && (
-        <kbd className=" ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+        <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
           <span className="text-xs">CTRL</span>K
         </kbd>
       )}

@@ -28,7 +28,6 @@ import { TrashBox } from "./trash-box"
 import { useSearch } from "@/hooks/use-search"
 import { useSettings } from "@/hooks/use-settings"
 
-
 export const Navigation = () => {
   const search = useSearch()
   const settings = useSettings()
