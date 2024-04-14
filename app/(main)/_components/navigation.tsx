@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils"
 import {
-  ChevronLeft,
+  ChevronsLeft,
   MenuIcon,
   Plus,
   PlusCircle,
@@ -135,49 +135,58 @@ export const Navigation = () => {
   return (
     <>
       <aside
-        ref={sidebarRef}
         className={cn(
-          "group/sidbar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999]",
+          `group/sidebar h-full bg-secondary overflow-y-auto relative flex flex-col w-60 z-[99999]`,
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "w-0"
         )}
+        ref={sidebarRef}
       >
-        <div
-          onClick={collapse}
-          role="button"
-          className={cn(
-            "h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition",
-            isMobile && "opacity-100"
-          )}
-        >
-          <ChevronLeft className="h-6 w-6" />
-        </div>
         <div>
-          <UserItem />
-          <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
-          <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
-          <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
+          <div
+            className={cn(
+              `w-6 h-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute
+        top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition`,
+              isMobile && "opacity-100"
+            )}
+            onClick={collapse}
+            role="button"
+          >
+            <ChevronsLeft className="w-6 h-6" />
+          </div>
+          <div>
+            <UserItem />
+            <Item
+              label="Search"
+              icon={Search}
+              isSearch
+              onClick={search.onOpen}
+            />
+            <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
+            <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
+          </div>
+          <div className="mt-4">
+            <DocumentList />
+            <Item onClick={handleCreate} icon={Plus} label="Add a page" />
+            <Popover>
+              <PopoverTrigger className="w-full mt-4">
+                <Item label="Trash" icon={Trash} />
+              </PopoverTrigger>
+              <PopoverContent
+                className="p-0 w-72 "
+                side={isMobile ? "bottom" : "right"}
+              >
+                <TrashBox />
+              </PopoverContent>
+            </Popover>
+          </div>
+          <div
+            className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10
+        right-0 top-0"
+            onMouseDown={handleMouseDown}
+            onClick={resetWidth}
+          ></div>
         </div>
-        <div className="mt-4">
-          <DocumentList />
-          <Item onClick={handleCreate} icon={Plus} label="Add a page" />
-          <Popover>
-            <PopoverTrigger className="w-full mt-4">
-              <Item label="Trash" icon={Trash} />
-            </PopoverTrigger>
-            <PopoverContent
-              className="p-0 w-72"
-              side={isMobile ? "bottom" : "right"}
-            >
-              <TrashBox />
-            </PopoverContent>
-          </Popover>
-        </div>
-        <div
-          onMouseDown={handleMouseDown}
-          onClick={resetWidth}
-          className="opacity=0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0"
-        />
       </aside>
       <div
         ref={navbarRef}
